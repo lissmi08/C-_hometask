@@ -36,4 +36,7 @@ int main() {
     int hours = 3;
     TelescopeRental rental(regularPrice);
     cout << "Regular rental: " << rental.cost(hours) << " RUB\n";
+
+    rental.setStrategy(studentPrice);
+    cout << "Student rental: " << rental.cost(hours) << " RUB\n";
 }
