@@ -32,6 +32,13 @@ public:
     }
 };
 
+// Decorator: wrap any pricing function and add a protective case.
+Price withCase(Price basePrice) {
+    return [basePrice](int hours) {
+        return basePrice(hours) + 50;
+    };
+}
+
 int main() {
     int hours = 3;
     TelescopeRental rental(regularPrice);
@@ -39,4 +46,10 @@ int main() {
 
     rental.setStrategy(studentPrice);
     cout << "Student rental: " << rental.cost(hours) << " RUB\n";
+
+    rental.setStrategy(withCase(studentPrice));
+    cout << "Student rental with case: " << rental.cost(hours) << " RUB\n";
+
+    rental.setStrategy(withCase(regularPrice));
+    cout << "Regular rental with case: " << rental.cost(hours) << " RUB\n";
 }
